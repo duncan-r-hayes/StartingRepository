@@ -1,0 +1,140 @@
+﻿@model ProcessAudit2.Models.PaAudits
+
+@{
+    ViewData["Title"] = "Create";
+}
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<h1>Start New Audit</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-7">
+        <form asp-action="Create">
+            <div class="form-group">
+                <label asp-for="Auditor" class="control-label"></label>
+                <input asp-for="Auditor" class="form-control" />
+                <span asp-validation-for="Auditor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Shift</label>
+                <select asp-for="Shift" class="form-control">
+                    <option selected hidden>Select a Shift</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Plant</label>
+                <select asp-for="Location" id="plantSelect" class="form-control">
+                    <option selected hidden>Select a Plant</option>
+                    <option>Jackson</option>
+                    <option>Clinton</option>
+                    <option>Aiken</option>
+                    <option>Meizhou</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Area" class="control-label"></label>
+                <select asp-for="Area" id="areaSelect" class="form-control">
+                    <option selected hidden>Select an Area</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Work Center</label>
+                <select asp-for="WorkCenter" id="workSelect" class="form-control">
+                    <option selected hidden>Select a Work Center</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Operator" class="control-label"></label>
+                <input asp-for="Operator" class="form-control" />
+                <span asp-validation-for="Operator" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<style>
+    select {
+        display:block;
+    }
+    h1 {
+        display:flex;
+        justify-content:center;
+    }
+    .container-fluid {
+        width: 100%;
+    }
+    .col-md-6 {
+        display:flex;
+        justify-content:center;
+        width:100%;
+    }
+    .row {
+        width:100%;
+        display:flex;
+        justify-content:center;
+    }
+</style>
+<script>
+    
+    var areaS = document.getElementById("areaSelect");
+    var workS = document.getElementById("workSelect");
+    var plantS = document.getElementById("plantSelect");
+    plantS.onchange = function () {
+        var areaS = document.getElementById("areaSelect");
+            areaS.options.length = 1;
+            $.get("/Audit/SetAreas", { plantName: plantS.value }, function (data) {
+  
+                for (var i = 0; i < data.length; i++) {
+                    var value = data[i];
+                    areaS.options[areaS.options.length] = new Option(value, value);
+                }
+            });
+    }
+    areaS.onchange = function () {
+        var workS = document.getElementById("workSelect");
+        workS.options.length = 1;
+        $.get("/Audit/SetWorkCenters", { areaName: areaS.value }, function (data) {
+
+            for (var i = 0; i < data.length; i++) {
+                var value = data[i];
+                workS.options[workS.options.length] = new Option(value, value);
+            }
+        });
+    }
+    //$.get("/Audit/SetOptions", function (data) {
+    //    console.log(data);
+    //    for (var i = 0; i < data.length; i++) {
+    //        if (data[i] == null) {
+    //            $('#filter').append(`<option value="NULL">
+    //                                   Other
+    //                              </option>`);
+    //            continue;
+    //        }
+    //        $('#filter').append(`<option value="${data[i]}">
+    //                                   ${data[i]}
+    //                              </option>`);
+    //    }
+    //});
+
+    //filterSel.onchange = function () {
+    //    assetSel.options.length = 0;
+    //    $.get("/Home/GetOptions", { name: filterSel.value }, function (data) {
+    //        console.log(data);
+    //        for (var i = 0; i < data.length; i++) {
+    //            var value = data[i];
+    //            assetSel.options[asset.options.length] = new Option(value);
+    //        }
+    //    });
+
+    //}
+</script>

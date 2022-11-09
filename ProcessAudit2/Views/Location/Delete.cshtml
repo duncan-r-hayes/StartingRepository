@@ -1,0 +1,52 @@
+﻿@model ProcessAudit2.Models.PaLocation
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete the @Model.Name location?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
+<style>
+    select {
+        display: block;
+    }
+
+    h1 {
+        display: flex;
+        justify-content: center;
+    }
+
+    .container-fluid {
+        width: 100%;
+    }
+
+    .col-md-6 {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .row {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+</style>

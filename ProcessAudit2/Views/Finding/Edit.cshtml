@@ -1,0 +1,88 @@
+﻿@model ProcessAudit2.Models.PaFinding
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Finding for Audit # @Model.Id</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data"> 
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group" hidden>
+                <label asp-for="AuditId" class="control-label"></label>
+                <input asp-for="AuditId" class="form-control"/>
+                <span asp-validation-for="AuditId" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Assignee" class="control-label"></label>
+                <input asp-for="Assignee" class="form-control" />
+                <span asp-validation-for="Assignee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <input asp-for="Type" class="form-control" />
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Action" class="control-label"></label>
+                <input asp-for="Action" class="form-control" />
+                <span asp-validation-for="Action" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="max-width:200px;overflow:visible;">
+                <input asp-for="Picture" type="file">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<style>
+    h1 {
+        display: flex;
+        justify-content: center;
+    }
+
+    .container-fluid {
+        width: 100%;
+    }
+
+    .col-md-6 {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .row {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+</style>

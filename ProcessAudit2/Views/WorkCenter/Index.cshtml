@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ProcessAudit2.Models.PaWorkCenter>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Work Centers</h1>
+
+<p>
+    <a asp-action="Create">+ Add New</a>
+</p>
+<table class="table" id="tblArea">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AreaID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AreaID)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<script>
+    //$("body").on("click", "#tblArea .Edit", function () {
+    //    var row = $(this).closest("tr");
+    //    $("td", row).each(function () {
+    //        if ($(this).find("input").length > 0) {
+    //            $(this).find("input").show();
+    //            $(this).find("span").hide();
+    //        }
+    //    });
+    //    row.find(".Update").show();
+    //    row.find(".Cancel").show();
+    //    row.find(".Delete").hide();
+    //    $(this).hide();
+    //});
+</script>

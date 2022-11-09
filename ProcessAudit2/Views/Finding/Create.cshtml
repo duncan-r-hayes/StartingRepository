@@ -1,0 +1,300 @@
+﻿@model ProcessAudit2.Models.PaFinding
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h2 style="text-align:center;">Current Audit for @ViewBag.Audit.WorkCenter</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4" id="left">
+        <div>
+            <h5 style="text-align:center">
+                Audit Info
+            </h5>
+        </div>
+        <hr>
+        <div class="form-group">
+            <label class="control-label">Area: </label>
+            @ViewBag.Audit.Area
+        </div>
+        <div class="form-group">
+            <label class="control-label">Shift: </label>
+            @ViewBag.Audit.Shift
+        </div>
+        <div class="form-group">
+            <label class="control-label">Date: </label>
+            @ViewBag.Audit.Date
+        </div>
+        <div class="form-group">
+            <label class="control-label">Operator: </label>
+            @ViewBag.Audit.Operator
+        </div>
+        <div class="form-group">
+            <label class="control-label">Location: </label>
+            @ViewBag.Audit.Location
+        </div>
+        <hr>
+        <a asp-controller="Finding" asp-action="RelatedFindings" asp-route-auditid="@ViewBag.Audit.Id" id="findings">Current Findings: @ViewBag.CountOfFindings </a>
+    </div>
+    <div class="col-md-4" id="left2">
+        <div class="yeah">
+            <div class="no_b">
+                <label class="control-label">Plant: </label>
+                @ViewBag.Audit.Location
+            </div>
+            <div class="no_b">
+                <label class="control-label">Area: </label>
+                @ViewBag.Audit.Area
+            </div>
+        </div>
+        <div class="parent" style="text-align:center;display:contents">
+            <a asp-controller="Finding" asp-action="RelatedFindings" asp-route-auditid="@ViewBag.Audit.Id" id="findings">Current Findings: @ViewBag.CountOfFindings </a>
+        </div>
+        <hr>
+    </div>
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-7" id="right">
+        <form asp-action="Create" method="post" enctype="multipart/form-data" id="form">
+            <div class="form-group" hidden>
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" value="" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="AuditId" class="control-label"></label>
+                <input asp-for="AuditId" value="@ViewBag.Audit.Id" class="form-control" />
+                <span asp-validation-for="AuditId" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <input asp-for="Type" class="form-control" />
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Action" class="control-label"></label>
+                <input asp-for="Action" class="form-control" />
+                <span asp-validation-for="Action" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Assignee" class="control-label"></label>
+                <select asp-for="Assignee" id="areaSelect" class="form-control chosen">
+                    <option selected hidden>Select a User</option>
+                </select>
+            </div>
+            <div class="form-group" style="float:left;display:flex;max-width:200px;overflow:visible;margin-top:20px">
+                <input asp-for="Picture" type="file">
+            </div>
+            <br>
+        </form>
+        <form asp-controller="Audit" asp-action="SetComplete" asp-route-id="@ViewBag.Audit.Id" class="special" id="complete">
+        </form>
+        <div class="form-group" style="display:flex; float:left; margin-bottom:0px;transform: translateY(-8px);">
+            <input type="submit" value="Add Finding" class="btn btn-primary" form="form" />
+            <input type="submit" value="Complete Audit" class="btn btn-primary" form="complete">
+        </div>
+        @*select asp-for="Assignee" id="select2" class="form-control form-control-chosen">
+            <option>Select a User</option>
+            <option>Test</option>
+            <option>For</option>
+            <option>Search</option>
+        </select>*@
+    </div>
+</div>
+
+<style>
+    @@media only screen and (max-width:800px) {
+        #findings {
+            margin-left: 45px !important;
+        }
+
+        input[type=submit] {
+            margin-bottom: 30px;
+            margin-top: 0px;
+            transform: translateY(-100px)
+        }
+
+        .parent {
+            margin-right: 78px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        #left {
+            display: none;
+        }
+
+        #left2 {
+            display: block;
+        }
+
+        input, select {
+            max-width: 98%;
+        }
+
+        .yeah {
+            display: flex;
+            justify-content: space-evenly;
+            text-align: center;
+            margin-bottom: 0px;
+        }
+
+        .no_b {
+            margin-left: 12px;
+            margin-bottom: 0px;
+        }
+    }
+
+    @@media only screen and (max-width:576px) {
+        #findings {
+            margin-left: 124px !important;
+        }
+
+        input[type=submit] {
+            margin-bottom: 30px;
+            margin-top: 0px;
+            transform: translateY(-100px)
+        }
+
+        .parent {
+            margin-right: 78px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        #left {
+            display: none;
+        }
+
+        #left2 {
+            display: block;
+        }
+
+        input, select {
+            max-width: 98%;
+        }
+
+        .yeah {
+            display: flex;
+            justify-content: space-evenly;
+            text-align: center;
+            margin-bottom: 0px;
+        }
+
+        .no_b {
+            margin-left: 12px;
+            margin-bottom: 0px;
+        }
+    }
+
+    @@media only screen and (min-width:801px) {
+        #left2 {
+            display: none;
+        }
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    .form-group {
+        margin-left: 12px;
+    }
+
+    .col-md-1 {
+        padding: 0px;
+    }
+
+    #right {
+        padding: 0;
+        /*max-height:500px*/
+    }
+
+    #findings {
+        margin-bottom: 5px;
+        margin-left: 100px;
+    }
+
+    #left {
+        background-color: #f2f3f4;
+        width: auto;
+        height: 358px;
+        border-radius: 8px;
+        margin: 0;
+        margin-top: 8px;
+    }
+
+    .col-md-4 {
+        padding-top: 5px;
+    }
+
+    a {
+        margin: auto;
+    }
+
+    h1 {
+        display: flex;
+        justify-content: center;
+    }
+
+    .special {
+        margin-top: 48px;
+        margin-left: 200px;
+        float: right;
+        clear: both;
+        margin-bottom: 55px;
+    }
+
+    input[type=submit] {
+        margin-top: 25px;
+        margin-right: 15px;
+        text-align: center;
+    }
+</style>
+<script>
+    window.onload = function () {
+        var areaS = document.getElementById("areaSelect");
+        areaS.options.length = 0;
+        $.get("/Finding/SetAssignees", function (data) {
+            areaS.options[areaS.options.length] = new Option("Select a user", "");
+            for (var i = 0; i < data.length; i++) {
+                var value = data[i];
+                areaS.options[areaS.options.length] = new Option(value, value);
+            }
+        });
+        //("#areaSelect").chosen();
+        //("#select2").chosen();
+    }
+    //$(function () {
+    //    $("select").chosen();
+    //});
+    //$(function () {
+    //    $("#areaSelect").chosen();
+    //});
+    //$(function () {
+    //    $("#select2").chosen();
+    //});
+
+</script>

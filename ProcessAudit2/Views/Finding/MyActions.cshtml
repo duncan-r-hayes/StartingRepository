@@ -1,0 +1,337 @@
+﻿@model IEnumerable<ProcessAudit2.Models.PaFinding>
+
+@{
+    ViewData["Title"] = "RelatedFindings";
+}
+
+<h1>My Avaliable Tasks</h1>
+    <a asp-action="Index" asp-controller="Home">Return home</a>
+<hr/>
+@if(Model.Count() == 0)
+{
+    @Html.Raw("<h3>You have no tasks to complete!</h3>");
+}
+<div class="outer1">
+    @foreach (var item in Model)
+    {
+        <div class="bodie">
+            <div class="title">
+                <div class="top">
+                    <p class="title">
+                        @Html.Raw("Audit #: ")
+                        @Html.DisplayFor(modelItem => item.AuditId) - @Html.Raw("Finding # ")@Html.DisplayFor(modelItem => item.Id)
+                    </p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="inner">
+                        <p style="font-weight:bold">@Html.Raw("Type: ")</p>
+                        <p>@Html.DisplayFor(modelItem => item.Type)</p>
+                    </div>
+
+                    <div class="long">
+                        <p style="font-weight:bold">@Html.Raw("Description: ")</p>
+                        <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                    </div>
+
+                    <div class="long">
+                        <p style="font-weight:bold">@Html.Raw("Action Required: ")</p>
+                        <p>@Html.DisplayFor(modelItem => item.Action)</p>
+                    </div>
+                </div>
+                <div class="col-md-3" id="left">
+                    @if (item.Image == null || item.Image == "")
+                    {
+                        @Html.Raw("No Image Was Taken");
+                    }
+                    else
+                    {
+                        <a href="@Html.Raw("/")@Html.DisplayFor(modelItem => item.Image)" target="_blank">
+                            <img src="@Html.Raw("/")@Html.DisplayFor(modelItem => item.Image)" class="image" alt="car">
+                        </a>
+                    }
+                    <div class="col-md-1" id="test">
+                        <a asp-action="CompleteFinding" asp-controller="Finding" asp-route-id="@item.Id">Complete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    }
+</div>
+<div class="outer2">
+    @foreach (var item in Model)
+    {
+        <div class="bodie">
+            <div class="col-md-3">
+                <div class="top">
+                    <p class="title">
+                        @Html.Raw("Audit #: ")
+                        @Html.DisplayFor(modelItem => item.AuditId) - @Html.Raw("Finding # ")@Html.DisplayFor(modelItem => item.Id)
+                    </p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="inner">
+                        <p style="font-weight:bold">@Html.Raw("Type: ")</p>
+                        <p>@Html.DisplayFor(modelItem => item.Type)</p>
+                    </div>
+                    <br>
+                    <div class="inner">
+                        <p style="font-weight:bold">@Html.Raw("Assignee: ")</p>
+                        <p>@Html.DisplayFor(modelItem => item.Assignee)</p>
+                    </div>
+                    <br>
+                    <div class="inner">
+                        <p style="font-weight:bold">@Html.Raw("Date: ")</p>
+                        <p>@Html.DisplayFor(modelItem => item.Date)</p>
+                    </div>
+                </div>
+                <div class="col-md-3" style="min-width:400px;max-width:400px;">
+                    <div class="long">
+                        <p style="font-weight:bold">@Html.Raw("Description: ")</p>
+                        <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="long">
+                        <p style="font-weight:bold">@Html.Raw("Action Required: ")</p>
+                        <p>@Html.DisplayFor(modelItem => item.Action)</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    @if (item.Image == null || item.Image == "")
+                    {
+                        @Html.Raw("No Image Was Taken");
+                    }
+                    else
+                    {
+                        <a href="@Html.Raw("/")@Html.DisplayFor(modelItem => item.Image)" target="_blank">
+                            <img src="@Html.Raw("/")@Html.DisplayFor(modelItem => item.Image)" class="image" alt="car">
+                        </a>
+                    }
+                </div>
+                <div class="col-md-1">
+                    <a asp-action="CompleteFinding" asp-controller="Finding" asp-route-id="@item.Id" id="comp">Complete</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<style>
+    @@media only screen and (max-width:600px) {
+        #comp {
+            margin-top:10px;
+        }
+        .outer1 {
+            display: inline;
+        }
+
+        .col-md-1 {
+            text-align: center;
+            margin-left: 15px;
+        }
+
+        .title {
+            margin-left: 10px;
+            font-weight: bold;
+            margin-bottom: 0px;
+            margin-top: 7px;
+        }
+
+        .test {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .outer2 {
+            display: none;
+        }
+
+        .col-md-3 {
+            max-width: 50%;
+        }
+
+        img {
+            max-height: 100%;
+            max-width: 100%;
+            float: right;
+            clear: both;
+            vertical-align: central;
+            padding-bottom: 10px;
+        }
+
+        .bodie {
+            background-color: #f2f3f4;
+            border-radius: 8px;
+            margin: auto;
+        }
+
+        .long {
+            max-width: 95%;
+        }
+
+        #test {
+            display: flex;
+            margin-left: 15px;
+        }
+
+        .row {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            margin-left: 4px;
+        }
+    }
+
+    @@media only screen and (min-width:601px) and (max-width:999px) {
+        .outer1 {
+            display: inline;
+        }
+
+        #left {
+            margin-left: 150px;
+        }
+
+        .col-md-1 {
+            text-align: center;
+        }
+
+        .title {
+            margin-left: 10px;
+            font-weight: bold;
+            margin-bottom: 0px;
+            margin-top: 7px;
+        }
+
+        #test {
+            display: flex;
+        }
+
+        .test {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .outer2 {
+            display: none;
+        }
+
+        .col-md-3 {
+            width: 200%;
+        }
+
+        img {
+            max-height: 100%;
+            max-width: 100%;
+            float: right;
+            clear: both;
+            vertical-align: central;
+            padding-bottom: 10px;
+            margin-left: 40px;
+        }
+
+        .bodie {
+            background-color: #f2f3f4;
+            border-radius: 8px;
+            margin: auto;
+        }
+
+        .long {
+            max-width: 95%;
+        }
+
+        .row {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            margin-left: 4px;
+        }
+    }
+
+    @@media only screen and (min-width:1000px) {
+        .outer1 {
+            display: none;
+        }
+
+        .outer2 {
+            display: block;
+        }
+
+        .outer {
+            overflow: auto;
+        }
+
+        p {
+            display: inline;
+        }
+
+        .bodie {
+            background-color: #f2f3f4;
+            padding-left: 15px;
+            border-radius: 8px;
+        }
+
+        .edit {
+        }
+
+        a {
+            display: block;
+            margin-bottom: 5px;
+            margin-right: 4px;
+        }
+
+        i {
+            display: block;
+            margin-left: 12%;
+        }
+
+        img {
+            max-height: 100%;
+            max-width: 100%;
+            float: right;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            padding-bottom: 10px;
+        }
+
+        .row {
+            width: 100%;
+            height: 150px;
+            background-color: #f2f3f4;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .col-md-3 {
+            min-width: 200px;
+        }
+
+        .col-md-1 {
+            margin-left: 50px;
+            margin-top: 30px;
+        }
+
+        .col-md-6 {
+            max-width: 350px;
+            max-height: 200px;
+            float: right;
+            display: block;
+        }
+
+        .title {
+            font-weight: bold;
+            text-decoration: underline;
+            font-size: 16px;
+        }
+    }
+</style>
+

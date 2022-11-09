@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\duncan.hayes\source\repos\ProcessAudit2\ProcessAudit2\bin\Release\net5.0\publish\</_PublishTargetUrl>
+    <History>True|2022-11-07T16:34:35.8126122Z;True|2022-11-04T17:08:42.4447838-04:00;True|2022-11-04T09:53:06.1669759-04:00;True|2022-11-02T09:27:09.9165169-04:00;True|2022-11-02T09:26:14.8106680-04:00;True|2022-10-20T16:22:16.2406165-04:00;True|2022-10-19T11:54:25.5139269-04:00;False|2022-10-18T14:52:01.2326641-04:00;True|2022-10-18T14:31:39.2416785-04:00;True|2022-10-18T14:19:10.7156486-04:00;True|2022-10-18T13:56:55.2981081-04:00;False|2022-10-18T13:56:13.7184282-04:00;True|2022-10-17T14:38:05.0436924-04:00;True|2022-10-17T14:26:42.0885808-04:00;True|2022-10-14T16:51:58.5238221-04:00;False|2022-10-14T16:51:40.4749393-04:00;True|2022-10-14T15:29:07.7851272-04:00;True|2022-10-07T10:27:50.9429876-04:00;True|2022-10-04T16:48:14.6983331-04:00;True|2022-10-03T13:39:53.1492056-04:00;</History>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,68 @@
+﻿@model ProcessAudit2.Models.PaFinding
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<h4>Are you sure you want to delete Finding - @Model.Id</h4>
+<div>
+    <form asp-action="DeleteConfirmed">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> 
+        <a asp-action="RelatedFindings" asp-controller="Finding" asp-route-auditId="@Model.AuditId" class="btn btn-primary">Back to List</a>
+    </form>
+</div>
+<style>
+    .edit {
+        margin-top: 75px;
+    }
+
+    a {
+        display: block;
+        margin-bottom: 5px;
+        margin-right: 4px;
+        margin-top:4px;
+    }
+
+    i {
+        display: block;
+        margin-right: 8px;
+    }
+
+    .row {
+        width: 100%;
+        height: 200px;
+        background-color: lightgray;
+        border-radius: 8px;
+        margin-bottom: 25px;
+    }
+
+    .col-md-3 {
+        min-width: 200px;
+    }
+
+    .col-md-6 {
+        max-width: 350px;
+        max-height: 200px;
+        float: right;
+    }
+
+    img {
+        max-height: 200px;
+        max-width: 250px;
+        float: right;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+    }
+
+    .title {
+        font-weight: bold;
+        text-decoration: underline;
+        font-size: 16px;
+    }
+
+    .long {
+        margin-top: 40px;
+    }
+</style>
